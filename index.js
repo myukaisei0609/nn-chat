@@ -5,7 +5,9 @@ const router = require('./lib/router');
 
 const basic = auth.basic({
   realm: 'Enter username and passward.',
-  file: './users.htpasswd'
+  file: process.env.RENDER
+    ? '/etc/secrets/users.htpasswd'
+    : './users.htpasswd'
 });
 
 const server = http.createServer(basic.check((req, res) => {
