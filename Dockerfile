@@ -18,4 +18,4 @@ WORKDIR /app
 COPY . /app
 RUN yarn install
 
-CMD ["sh", "run.sh"]
+CMD ["node", "index.js"]
