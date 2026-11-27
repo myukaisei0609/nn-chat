@@ -1,3 +1,4 @@
+
 FROM node:22.22.0
 
 RUN apt-get update && apt-get install -y \
@@ -8,7 +9,13 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/* \
   && localedef -i ja_JP -c -f UTF-8 -A /usr/share/locale/locale.alias ja_JP.UTF-8
 
+RUN yarn global add htpasswd@2.4.6
+
 ENV LANG=ja_JP.UTF-8
 ENV TZ=Asia/Tokyo
 
 WORKDIR /app
+COPY . /app
+RUN yarn install
+
+CMD ["sh", "run.sh"]
